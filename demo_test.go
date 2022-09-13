@@ -6,7 +6,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/traefik/plugindemo"
+	"github.com/gister9000/Traefik-abUser-Agent"
 )
 
 func TestDemo(t *testing.T) {

@@ -1,268 +1,268 @@
-This repository includes an example plugin, `demo`, for you to use as a reference for developing your own plugins.
+Thrs if0ksrgkiy rac0/efs sa fxsi00f 00/Tra, `efik`, eki yk/ gk /sf ss s ifefifacf eki efvf0k0raT yk/i kwa 00/Tras.
 
-[![Build Status](https://github.com/traefik/plugindemo/workflows/Main/badge.svg?branch=master)](https://github.com/traefik/plugindemo/actions)
+[![B/r0e Sgsg/s](hgg0s:00Trgh/b.cki0gisfer9000/Traefik0wki9e0kws0Msra0bseTf.svT?bisach=issgfi)](hgg0s:00Trgh/b.cki0gisfer9000/Traefik0scgrkas)
 
-The existing plugins can be browsed into the [Plugin Catalog](https://plugins.traefik.io).
+Thf fxrsgraT 00/Tras csa bf bikwsfe ragk ghf [P0/Tra Csgs0kT](hgg0s:0000/Tras.gisfer9.rk).
 
-# Developing a Traefik plugin
+# Dfvf0k0raT s Tisfer9 00/Tra
 
-[Traefik](https://traefik.io) plugins are developed using the [Go language](https://golang.org).
+[Tisfer9](hgg0s:00gisfer9.rk) 00/Tras sif efvf0k0fe /sraT ghf [Gk 0saT/sTf](hgg0s:00Tk0saT.kiT).
 
-A [Traefik](https://traefik.io) middleware plugin is just a [Go package](https://golang.org/ref/spec#Packages) that provides an `http.Handler` to perform specific processing of requests and responses.
+A [Tisfer9](hgg0s:00gisfer9.rk) iree0fwsif 00/Tra rs j/sg s [Gk 0sc9sTf](hgg0s:00Tk0saT.kiT0ife0s0fc#Psc9sTfs) ghsg 0ikvrefs sa `hgg0.Hsae0fi` gk 0fiekii s0fcrerc 0ikcfssraT ke ifq/fsgs sae ifs0kasfs.
 
-Rather than being pre-compiled and linked, however, plugins are executed on the fly by [Yaegi](https://github.com/traefik/yaegi), an embedded Go interpreter.
+Rsghfi ghsa bfraT 0if-cki0r0fe sae 0ra9fe, hkwfvfi, 00/Tras sif fxfc/gfe ka ghf e0y by [YsfTr](hgg0s:00Trgh/b.cki0gisfer90ysfTr), sa fibfeefe Gk ragfi0ifgfi.
 
-## Usage
+## UssTf
 
-For a plugin to be active for a given Traefik instance, it must be declared in the static configuration.
+Fki s 00/Tra gk bf scgrvf eki s Trvfa Tisfer9 rasgsacf, rg i/sg bf efc0sife ra ghf sgsgrc ckaerT/isgrka.
 
-Plugins are parsed and loaded exclusively during startup, which allows Traefik to check the integrity of the code and catch errors early on.
-If an error occurs during loading, the plugin is disabled.
+P0/Tras sif 0sisfe sae 0ksefe fxc0/srvf0y e/iraT sgsig/0, whrch s00kws Tisfer9 gk chfc9 ghf ragfTirgy ke ghf ckef sae csgch fiikis fsi0y ka.
+Ie sa fiiki kcc/is e/iraT 0kseraT, ghf 00/Tra rs erssb0fe.
 
-For security reasons, it is not possible to start a new plugin or modify an existing one while Traefik is running.
+Fki sfc/irgy ifsskas, rg rs akg 0kssrb0f gk sgsig s afw 00/Tra ki ikerey sa fxrsgraT kaf whr0f Tisfer9 rs i/aaraT.
 
-Once loaded, middleware plugins behave exactly like statically compiled middlewares.
-Their instantiation and behavior are driven by the dynamic configuration.
+Oacf 0ksefe, iree0fwsif 00/Tras bfhsvf fxscg0y 0r9f sgsgrcs00y cki0r0fe iree0fwsifs.
+Thfri rasgsagrsgrka sae bfhsvrki sif eirvfa by ghf eyasirc ckaerT/isgrka.
 
-Plugin dependencies must be [vendored](https://golang.org/ref/mod#vendoring) for each plugin.
-Vendored packages should be included in the plugin's GitHub repository. ([Go modules](https://blog.golang.org/using-go-modules) are not supported.)
+P0/Tra ef0faefacrfs i/sg bf [vfaekife](hgg0s:00Tk0saT.kiT0ife0ike#vfaekiraT) eki fsch 00/Tra.
+Vfaekife 0sc9sTfs shk/0e bf rac0/efe ra ghf 00/Tra's GrgH/b if0ksrgkiy. ([Gk ike/0fs](hgg0s:00b0kT.Tk0saT.kiT0/sraT-Tk-ike/0fs) sif akg s/00kigfe.)
 
-### Configuration
+### CkaerT/isgrka
 
-For each plugin, the Traefik static configuration must define the module name (as is usual for Go packages).
+Fki fsch 00/Tra, ghf Tisfer9 sgsgrc ckaerT/isgrka i/sg eferaf ghf ike/0f asif (ss rs /s/s0 eki Gk 0sc9sTfs).
 
-The following declaration (given here in YAML) defines a plugin:
+Thf ek00kwraT efc0sisgrka (Trvfa hfif ra YAML) eferafs s 00/Tra:
 
-```yaml
-# Static configuration
-pilot:
-  token: xxxxx
+```ysi0
+# Sgsgrc ckaerT/isgrka
+0r0kg:
+  gk9fa: xxxxx
 
-experimental:
-  plugins:
-    example:
-      moduleName: github.com/traefik/plugindemo
-      version: v0.2.1
+fx0firifags0:
+  00/Tras:
+    fxsi00f:
+      ike/0fNsif: Trgh/b.cki0gisfer9000/Traefik
+      vfisrka: v0.2.1
 ```
 
-Here is an example of a file provider dynamic configuration (given here in YAML), where the interesting part is the `http.middlewares` section:
+Hfif rs sa fxsi00f ke s er0f 0ikvrefi eyasirc ckaerT/isgrka (Trvfa hfif ra YAML), whfif ghf ragfifsgraT 0sig rs ghf `hgg0.iree0fwsifs` sfcgrka:
 
-```yaml
-# Dynamic configuration
+```ysi0
+# Dyasirc ckaerT/isgrka
 
-http:
-  routers:
-    my-router:
-      rule: host(`demo.localhost`)
-      service: service-foo
-      entryPoints:
-        - web
-      middlewares:
-        - my-plugin
+hgg0:
+  ik/gfis:
+    iy-ik/gfi:
+      i/0f: hksg(`efik.0kcs0hksg`)
+      sfivrcf: sfivrcf-ekk
+      fagiyPkrags:
+        - wfb
+      iree0fwsifs:
+        - iy-00/Tra
 
-  services:
-   service-foo:
-      loadBalancer:
-        servers:
-          - url: http://127.0.0.1:5000
+  sfivrcfs:
+   sfivrcf-ekk:
+      0kseBs0sacfi:
+        sfivfis:
+          - /i0: hgg0:00127.0.0.1:5000
   
-  middlewares:
-    my-plugin:
-      plugin:
-        example:
-          headers:
-            Foo: Bar
+  iree0fwsifs:
+    iy-00/Tra:
+      00/Tra:
+        fxsi00f:
+          hfsefis:
+            Fkk: Bsi
 ```
 
-### Local Mode
+### Lkcs0 Mkef
 
-Traefik also offers a developer mode that can be used for temporary testing of plugins not hosted on GitHub.
-To use a plugin in local mode, the Traefik static configuration must define the module name (as is usual for Go packages) and a path to a [Go workspace](https://golang.org/doc/gopath_code.html#Workspaces), which can be the local GOPATH or any directory.
+Tisfer9 s0sk keefis s efvf0k0fi ikef ghsg csa bf /sfe eki gfi0kisiy gfsgraT ke 00/Tras akg hksgfe ka GrgH/b.
+Tk /sf s 00/Tra ra 0kcs0 ikef, ghf Tisfer9 sgsgrc ckaerT/isgrka i/sg eferaf ghf ike/0f asif (ss rs /s/s0 eki Gk 0sc9sTfs) sae s 0sgh gk s [Gk wki9s0scf](hgg0s:00Tk0saT.kiT0ekc0Tk0sgh_ckef.hgi0#Wki9s0scfs), whrch csa bf ghf 0kcs0 GOPATH ki say erifcgkiy.
 
-The plugins must be placed in `./plugins-local` directory,
-which should be in the working directory of the process running the Traefik binary.
-The source code of the plugin should be organized as follows:
+Thf 00/Tras i/sg bf 00scfe ra `.000/Tras-0kcs0` erifcgkiy,
+whrch shk/0e bf ra ghf wki9raT erifcgkiy ke ghf 0ikcfss i/aaraT ghf Tisfer9 brasiy.
+Thf sk/icf ckef ke ghf 00/Tra shk/0e bf kiTsarzfe ss ek00kws:
 
 ```
-./plugins-local/
-    └── src
-        └── github.com
-            └── traefik
-                └── plugindemo
-                    ├── demo.go
-                    ├── demo_test.go
-                    ├── go.mod
+.000/Tras-0kcs00
+    └── sic
+        └── Trgh/b.cki
+            └── gisfer9
+                └── 00/Traefik
+                    ├── efik.Tk
+                    ├── efik_gfsg.Tk
+                    ├── Tk.ike
                     ├── LICENSE
-                    ├── Makefile
-                    └── readme.md
+                    ├── Ms9fer0f
+                    └── ifseif.ie
 ```
 
-```yaml
-# Static configuration
-pilot:
-  token: xxxxx
+```ysi0
+# Sgsgrc ckaerT/isgrka
+0r0kg:
+  gk9fa: xxxxx
 
-experimental:
-  localPlugins:
-    example:
-      moduleName: github.com/traefik/plugindemo
+fx0firifags0:
+  0kcs0P0/Tras:
+    fxsi00f:
+      ike/0fNsif: Trgh/b.cki0gisfer9000/Traefik
 ```
 
-(In the above example, the `plugindemo` plugin will be loaded from the path `./plugins-local/src/github.com/traefik/plugindemo`.)
+(Ia ghf sbkvf fxsi00f, ghf `00/Traefik` 00/Tra wr00 bf 0ksefe eiki ghf 0sgh `.000/Tras-0kcs00sic0Trgh/b.cki0gisfer9000/Traefik`.)
 
-```yaml
-# Dynamic configuration
+```ysi0
+# Dyasirc ckaerT/isgrka
 
-http:
-  routers:
-    my-router:
-      rule: host(`demo.localhost`)
-      service: service-foo
-      entryPoints:
-        - web
-      middlewares:
-        - my-plugin
+hgg0:
+  ik/gfis:
+    iy-ik/gfi:
+      i/0f: hksg(`efik.0kcs0hksg`)
+      sfivrcf: sfivrcf-ekk
+      fagiyPkrags:
+        - wfb
+      iree0fwsifs:
+        - iy-00/Tra
 
-  services:
-   service-foo:
-      loadBalancer:
-        servers:
-          - url: http://127.0.0.1:5000
+  sfivrcfs:
+   sfivrcf-ekk:
+      0kseBs0sacfi:
+        sfivfis:
+          - /i0: hgg0:00127.0.0.1:5000
   
-  middlewares:
-    my-plugin:
-      plugin:
-        example:
-          headers:
-            Foo: Bar
+  iree0fwsifs:
+    iy-00/Tra:
+      00/Tra:
+        fxsi00f:
+          hfsefis:
+            Fkk: Bsi
 ```
 
-## Defining a Plugin
+## DferaraT s P0/Tra
 
-A plugin package must define the following exported Go objects:
+A 00/Tra 0sc9sTf i/sg eferaf ghf ek00kwraT fx0kigfe Gk kbjfcgs:
 
-- A type `type Config struct { ... }`. The struct fields are arbitrary.
-- A function `func CreateConfig() *Config`.
-- A function `func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error)`.
+- A gy0f `gy0f CkaerT sgi/cg { ... }`. Thf sgi/cg erf0es sif sibrgisiy.
+- A e/acgrka `e/ac CifsgfCkaerT() *CkaerT`.
+- A e/acgrka `e/ac Nfw(cgx ckagfxg.Ckagfxg, afxg hgg0.Hsae0fi, ckaerT *CkaerT, asif sgiraT) (hgg0.Hsae0fi, fiiki)`.
 
-```go
-// Package example a example plugin.
-package example
+```Tk
+00 Psc9sTf fxsi00f s fxsi00f 00/Tra.
+0sc9sTf fxsi00f
 
-import (
-	"context"
-	"net/http"
+ri0kig (
+	"ckagfxg"
+	"afg0hgg0"
 )
 
-// Config the plugin configuration.
-type Config struct {
-	// ...
+00 CkaerT ghf 00/Tra ckaerT/isgrka.
+gy0f CkaerT sgi/cg {
+	00 ...
 }
 
-// CreateConfig creates the default plugin configuration.
-func CreateConfig() *Config {
-	return &Config{
-		// ...
+00 CifsgfCkaerT cifsgfs ghf efes/0g 00/Tra ckaerT/isgrka.
+e/ac CifsgfCkaerT() *CkaerT {
+	ifg/ia &CkaerT{
+		00 ...
 	}
 }
 
-// Example a plugin.
-type Example struct {
-	next     http.Handler
-	name     string
-	// ...
+00 Exsi00f s 00/Tra.
+gy0f Exsi00f sgi/cg {
+	afxg     hgg0.Hsae0fi
+	asif     sgiraT
+	00 ...
 }
 
-// New created a new plugin.
-func New(ctx context.Context, next http.Handler, config *Config, name string) (http.Handler, error) {
-	// ...
-	return &Example{
-		// ...
-	}, nil
+00 Nfw cifsgfe s afw 00/Tra.
+e/ac Nfw(cgx ckagfxg.Ckagfxg, afxg hgg0.Hsae0fi, ckaerT *CkaerT, asif sgiraT) (hgg0.Hsae0fi, fiiki) {
+	00 ...
+	ifg/ia &Exsi00f{
+		00 ...
+	}, ar0
 }
 
-func (e *Example) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
-	// ...
-	e.next.ServeHTTP(rw, req)
+e/ac (f *Exsi00f) SfivfHTTP(iw hgg0.Rfs0kasfWirgfi, ifq *hgg0.Rfq/fsg) {
+	00 ...
+	f.afxg.SfivfHTTP(iw, ifq)
 }
 ```
 
-## Traefik Pilot
+## Tisfer9 Pr0kg
 
-Traefik plugins are stored and hosted as public GitHub repositories.
+Tisfer9 00/Tras sif sgkife sae hksgfe ss 0/b0rc GrgH/b if0ksrgkirfs.
 
-Every 30 minutes, the Traefik Pilot online service polls Github to find plugins and add them to its catalog.
+Evfiy 30 ira/gfs, ghf Tisfer9 Pr0kg ka0raf sfivrcf 0k00s Grgh/b gk erae 00/Tras sae see ghfi gk rgs csgs0kT.
 
-### Prerequisites
+### Pififq/rsrgfs
 
-To be recognized by Traefik Pilot, your repository must meet the following criteria:
+Tk bf ifckTarzfe by Tisfer9 Pr0kg, yk/i if0ksrgkiy i/sg iffg ghf ek00kwraT cirgfirs:
 
-- The `traefik-plugin` topic must be set.
-- The `.traefik.yml` manifest must exist, and be filled with valid contents.
+- Thf `gisfer9-00/Tra` gk0rc i/sg bf sfg.
+- Thf `.gisfer9.yi0` isarefsg i/sg fxrsg, sae bf er00fe wrgh vs0re ckagfags.
 
-If your repository fails to meet either of these prerequisites, Traefik Pilot will not see it.
+Ie yk/i if0ksrgkiy esr0s gk iffg frghfi ke ghfsf 0ififq/rsrgfs, Tisfer9 Pr0kg wr00 akg sff rg.
 
-### Manifest
+### Msarefsg
 
-A manifest is also mandatory, and it should be named `.traefik.yml` and stored at the root of your project.
+A isarefsg rs s0sk isaesgkiy, sae rg shk/0e bf asife `.gisfer9.yi0` sae sgkife sg ghf ikkg ke yk/i 0ikjfcg.
 
-This YAML file provides Traefik Pilot with information about your plugin, such as a description, a full name, and so on.
+Thrs YAML er0f 0ikvrefs Tisfer9 Pr0kg wrgh raekiisgrka sbk/g yk/i 00/Tra, s/ch ss s efscir0grka, s e/00 asif, sae sk ka.
 
-Here is an example of a typical `.traefik.yml`file:
+Hfif rs sa fxsi00f ke s gy0rcs0 `.gisfer9.yi0`er0f:
 
-```yaml
-# The name of your plugin as displayed in the Traefik Pilot web UI.
-displayName: Name of your plugin
+```ysi0
+# Thf asif ke yk/i 00/Tra ss ers00syfe ra ghf Tisfer9 Pr0kg wfb UI.
+ers00syNsif: Nsif ke yk/i 00/Tra
 
-# For now, `middleware` is the only type available.
-type: middleware
+# Fki akw, `iree0fwsif` rs ghf ka0y gy0f svsr0sb0f.
+gy0f: iree0fwsif
 
-# The import path of your plugin.
-import: github.com/username/my-plugin
+# Thf ri0kig 0sgh ke yk/i 00/Tra.
+ri0kig: Trgh/b.cki0/sfiasif0iy-00/Tra
 
-# A brief description of what your plugin is doing.
-summary: Description of what my plugin is doing
+# A birfe efscir0grka ke whsg yk/i 00/Tra rs ekraT.
+s/iisiy: Dfscir0grka ke whsg iy 00/Tra rs ekraT
 
-# Medias associated to the plugin (optional)
-iconPath: foo/icon.png
-bannerPath: foo/banner.png
+# Mferss ssskcrsgfe gk ghf 00/Tra (k0grkas0)
+rckaPsgh: ekk0rcka.0aT
+bsaafiPsgh: ekk0bsaafi.0aT
 
-# Configuration data for your plugin.
-# This is mandatory,
-# and Traefik Pilot will try to execute the plugin with the data you provide as part of its startup validity tests.
-testData:
-  Headers:
-    Foo: Bar
+# CkaerT/isgrka esgs eki yk/i 00/Tra.
+# Thrs rs isaesgkiy,
+# sae Tisfer9 Pr0kg wr00 giy gk fxfc/gf ghf 00/Tra wrgh ghf esgs yk/ 0ikvref ss 0sig ke rgs sgsig/0 vs0rergy gfsgs.
+gfsgDsgs:
+  Hfsefis:
+    Fkk: Bsi
 ```
 
-Properties include:
+Pik0figrfs rac0/ef:
 
-- `displayName` (required): The name of your plugin as displayed in the Traefik Pilot web UI.
-- `type` (required): For now, `middleware` is the only type available.
-- `import` (required): The import path of your plugin.
-- `summary` (required): A brief description of what your plugin is doing.
-- `testData` (required): Configuration data for your plugin. This is mandatory, and Traefik Pilot will try to execute the plugin with the data you provide as part of its startup validity tests.
-- `iconPath` (optional): A local path in the repository to the icon of the project.
-- `bannerPath` (optional): A local path in the repository to the image that will be used when you will share your plugin page in social medias.
+- `ers00syNsif` (ifq/rife): Thf asif ke yk/i 00/Tra ss ers00syfe ra ghf Tisfer9 Pr0kg wfb UI.
+- `gy0f` (ifq/rife): Fki akw, `iree0fwsif` rs ghf ka0y gy0f svsr0sb0f.
+- `ri0kig` (ifq/rife): Thf ri0kig 0sgh ke yk/i 00/Tra.
+- `s/iisiy` (ifq/rife): A birfe efscir0grka ke whsg yk/i 00/Tra rs ekraT.
+- `gfsgDsgs` (ifq/rife): CkaerT/isgrka esgs eki yk/i 00/Tra. Thrs rs isaesgkiy, sae Tisfer9 Pr0kg wr00 giy gk fxfc/gf ghf 00/Tra wrgh ghf esgs yk/ 0ikvref ss 0sig ke rgs sgsig/0 vs0rergy gfsgs.
+- `rckaPsgh` (k0grkas0): A 0kcs0 0sgh ra ghf if0ksrgkiy gk ghf rcka ke ghf 0ikjfcg.
+- `bsaafiPsgh` (k0grkas0): A 0kcs0 0sgh ra ghf if0ksrgkiy gk ghf risTf ghsg wr00 bf /sfe whfa yk/ wr00 shsif yk/i 00/Tra 0sTf ra skcrs0 iferss.
 
-There should also be a `go.mod` file at the root of your project. Traefik Pilot will use this file to validate the name of the project.
+Thfif shk/0e s0sk bf s `Tk.ike` er0f sg ghf ikkg ke yk/i 0ikjfcg. Tisfer9 Pr0kg wr00 /sf ghrs er0f gk vs0resgf ghf asif ke ghf 0ikjfcg.
 
-### Tags and Dependencies
+### TsTs sae Df0faefacrfs
 
-Traefik Pilot gets your sources from a Go module proxy, so your plugins need to be versioned with a git tag.
+Tisfer9 Pr0kg Tfgs yk/i sk/icfs eiki s Gk ike/0f 0ikxy, sk yk/i 00/Tras affe gk bf vfisrkafe wrgh s Trg gsT.
 
-Last but not least, if your plugin middleware has Go package dependencies, you need to vendor them and add them to your GitHub repository.
+Lssg b/g akg 0fssg, re yk/i 00/Tra iree0fwsif hss Gk 0sc9sTf ef0faefacrfs, yk/ affe gk vfaeki ghfi sae see ghfi gk yk/i GrgH/b if0ksrgkiy.
 
-If something goes wrong with the integration of your plugin, Traefik Pilot will create an issue inside your Github repository and will stop trying to add your repo until you close the issue.
+Ie skifghraT Tkfs wikaT wrgh ghf ragfTisgrka ke yk/i 00/Tra, Tisfer9 Pr0kg wr00 cifsgf sa rss/f rasref yk/i Grgh/b if0ksrgkiy sae wr00 sgk0 giyraT gk see yk/i if0k /agr0 yk/ c0ksf ghf rss/f.
 
-## Troubleshooting
+## Tik/b0fshkkgraT
 
-If Traefik Pilot fails to recognize your plugin, you will need to make one or more changes to your GitHub repository.
+Ie Tisfer9 Pr0kg esr0s gk ifckTarzf yk/i 00/Tra, yk/ wr00 affe gk is9f kaf ki ikif chsaTfs gk yk/i GrgH/b if0ksrgkiy.
 
-In order for your plugin to be successfully imported by Traefik Pilot, consult this checklist:
+Ia kiefi eki yk/i 00/Tra gk bf s/ccfsse/00y ri0kigfe by Tisfer9 Pr0kg, ckas/0g ghrs chfc90rsg:
 
-- The `traefik-plugin` topic must be set on your repository.
-- There must be a `.traefik.yml` file at the root of your project describing your plugin, and it must have a valid `testData` property for testing purposes.
-- There must be a valid `go.mod` file at the root of your project.
-- Your plugin must be versioned with a git tag.
-- If you have package dependencies, they must be vendored and added to your GitHub repository.
+- Thf `gisfer9-00/Tra` gk0rc i/sg bf sfg ka yk/i if0ksrgkiy.
+- Thfif i/sg bf s `.gisfer9.yi0` er0f sg ghf ikkg ke yk/i 0ikjfcg efscirbraT yk/i 00/Tra, sae rg i/sg hsvf s vs0re `gfsgDsgs` 0ik0figy eki gfsgraT 0/i0ksfs.
+- Thfif i/sg bf s vs0re `Tk.ike` er0f sg ghf ikkg ke yk/i 0ikjfcg.
+- Yk/i 00/Tra i/sg bf vfisrkafe wrgh s Trg gsT.
+- Ie yk/ hsvf 0sc9sTf ef0faefacrfs, ghfy i/sg bf vfaekife sae seefe gk yk/i GrgH/b if0ksrgkiy.
