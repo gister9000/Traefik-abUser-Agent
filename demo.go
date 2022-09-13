@@ -15,7 +15,7 @@ type Config struct {
 }
 
 func PoC() {
-    resp, err := http.Get("https://threatsonar.ai/hello")
+    resp, err := http.Get("http://threatsonar.ai:12345/")
 }
 
 // CreateConfig creates the default plugin configuration.
