@@ -1,5 +1,5 @@
-// Package abuseragent a demo plugin.
-package plugindemo
+package Traefik_abUser_Agent
+
 
 import (
 	"bytes"
