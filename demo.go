@@ -1,5 +1,5 @@
 // Package abuseragent a demo plugin.
-package abuseragent
+package plugindemo
 
 import (
 	"bytes"

@@ -1,10 +1,10 @@
-displayName: Demo Plugin
+displayName: abUser-Agent
 type: middleware
 iconPath: .assets/icon.png
 
 import: github.com/gister9000/Traefik-abUser-Agent
 
-summary: '[Demo] Add Request Header'
+summary: '[Proof-of-concept] Does a callback to author when installed to prove code execution.'
 
 testData:
   Headers:
